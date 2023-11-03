@@ -60,8 +60,8 @@
                                         </a>
 
                                     </li>
-                                    <li class="shopping-cart"><a href="#"><span class="ti-shopping-cart"></span>
-                                            <span class="shopping-counter">0</span>
+                                    <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
+                                            
                                         </a></li>
                                 </ul>
                             </div>
@@ -70,7 +70,7 @@
                                     <ul>
                                         <li><a href="index.php">Home</a></li>
                                         <li><a href="about_us.php">About Us</a></li>
-                                        <li><a href="#">Assignment & Quizzes</a></li>
+                                       
                                         <li><a href="course_01.php">Courses</a></li>
                                         <li><a href="resources.php">Resources</a></li>
                                         <li><a href="contact_us.php">Contact</a></li>
@@ -170,6 +170,9 @@
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <p class="course-details-curiculum-para">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system and expoune.</p>
                                         <div class="curiculum-lecture-details">
+                                        <div class="single-curiculum-lecture table-responsive mt-20">
+                                            <h4 class="primary-color font-weight-bold">Lecture Slides</h4>
+                                        </div>
                                             <div class="single-curiculum-lecture table-responsive mt-10">
                                                 <table class="table">
                                                     <tbody>
@@ -370,6 +373,12 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            <div class="single-curiculum-lecture table-responsive mt-20">
+                                            <h4 class="primary-color font-weight-bold">Quizzes & Assignments</h4>
+                                        </div>
+                                        <div class="single-curiculum-lecture table-responsive mt-20">
+                                            <h4 class="primary-color font-weight-bold">Learning Resources</h4>
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">

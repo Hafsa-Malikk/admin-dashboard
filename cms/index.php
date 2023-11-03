@@ -62,6 +62,9 @@
                       </div>
                     </a>
                   </li>
+                  <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
+                                            
+                                        </a></li>
                 </ul>
               </div>
               <div class="main-menu f-right">
@@ -69,7 +72,7 @@
                   <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about_us.php">About Us</a></li>
-                    <li><a href="#">Assignment & Quizzes</a></li>
+                    
                     <li><a href="course_01.php">Courses</a></li>
                     <li><a href="resources.php">Resources</a></li>
                     <li><a href="contact_us.php">Contact</a></li>
