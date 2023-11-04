@@ -1,4 +1,60 @@
-<!doctype html>
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location:login.php");
+    exit();
+}
+?>
+<?php
+require_once("db.php");
+
+$userName = $rating = $comments = "";
+
+$userNameErr = $ratingErr = $commentsErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["userName"])) {
+        $userNameErr = "User Name is required.";
+    } else {
+        $userName = $_POST["userName"];
+    }
+
+    if (empty($_POST["rating"])) {
+        $ratingErr = "Rating is required.";
+    } else {
+        $rating = $_POST["rating"];
+    }
+
+    if (empty($_POST["comments"])) {
+        $commentsErr = "Comments are required.";
+    } else {
+        $comments = $_POST["comments"];
+    }
+
+    if (empty($userNameErr) && empty($ratingErr) && empty($commentsErr)) {
+        $sql = "INSERT INTO feedback (name, rating, comments) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($con, $sql);
+
+        if ($stmt) {
+            // Bind parameters and execute the statement
+            mysqli_stmt_bind_param($stmt, "sss", $userName, $rating, $comments);
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo '<div class="alert alert-info" role="alert">Feedback Submitted Successfully</div>';
+            } else {
+                echo "Failed to submit feedback: " . mysqli_error($con);
+            }
+
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Preparation of the statement failed: " . mysqli_error($con);
+        }
+    }
+}
+?>
+
+
+<!Doctype html>
 <html class="no-js" lang="zxx">
 
 
@@ -34,58 +90,58 @@
 
     <!-- Add your site or application content here -->
     <!-- header-start -->
-    
-            <!-- /end header-top -->
-            <!-- header-bottom -->
-            <div class="header-bottom-area header-sticky" style="transition: .6s;">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-2 col-lg-2 col-md-6 col-6">
-                            <div class="logo">
-                                <a href="index.php">
-                                    <img src="img/logo/logo.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-6 col-6">
-                            <div class="header-bottom-icon f-right">
-                                <ul>
-                                    <li class="toggle-search-icon"><a href="#"><span class="ti-search"></span>
-                                            <div class="toggle-search-box">
-                                                <form action="#" id="searchbox">
-                                                    <input placeholder="Search" type="text">
-                                                    <button class="button-search"><span class="ti-search"></span></button>
-                                                </form>
-                                            </div>
-                                        </a>
 
-                                    </li>
-                                    <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
-                                            
-                                        </a></li>
-                                </ul>
-                            </div>
-                            <div class="main-menu f-right">
-                                <nav id="mobile-menu" style="display: block;">
-                                    <ul>
-                                        <li><a href="index.php">Home</a></li>
-                                        <li><a href="about_us.php">About Us</a></li>
-                                       
-                                        <li><a href="course_01.php">Courses</a></li>
-                                        <li><a href="resources.php">Resources</a></li>
-                                        <li><a href="contact_us.php">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile-menu"></div>
-                        </div>
+    <!-- /end header-top -->
+    <!-- header-bottom -->
+    <div class="header-bottom-area header-sticky" style="transition: .6s;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-2 col-lg-2 col-md-6 col-6">
+                    <div class="logo">
+                        <a href="index.php">
+                            <img src="img/logo/logo.png" alt="">
+                        </a>
                     </div>
                 </div>
+                <div class="col-xl-10 col-lg-10 col-md-6 col-6">
+                    <div class="header-bottom-icon f-right">
+                        <ul>
+                            <li class="toggle-search-icon"><a href="#"><span class="ti-search"></span>
+                                    <div class="toggle-search-box">
+                                        <form action="#" id="searchbox">
+                                            <input placeholder="Search" type="text">
+                                            <button class="button-search"><span class="ti-search"></span></button>
+                                        </form>
+                                    </div>
+                                </a>
+
+                            </li>
+                            <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
+
+                                </a></li>
+                        </ul>
+                    </div>
+                    <div class="main-menu f-right">
+                        <nav id="mobile-menu" style="display: block;">
+                            <ul>
+                                <li><a href="index.php">Home</a></li>
+                                <li><a href="about_us.php">About Us</a></li>
+
+                                <li><a href="course_01.php">Courses</a></li>
+                                <li><a href="resources.php">Resources</a></li>
+                                <li><a href="contact_us.php">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mobile-menu"></div>
+                </div>
             </div>
-            <!-- /end header-bottom -->
         </div>
+    </div>
+    <!-- /end header-bottom -->
+    </div>
     </header>
     <!-- header-end -->
     <!-- slider-start -->
@@ -121,7 +177,7 @@
                         </div>
                         <div class="single-course-details white-bg">
                             <div class="course-details-title mb-20">
-                            <h1><?php echo isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found'; ?></h1>
+                                <h1><?php echo isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found'; ?></h1>
                             </div>
                             <div class="course-details-tabs">
                                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -147,8 +203,8 @@
                                         <div class="course-details-overview-bottom d-flex justify-content-between mt-25">
                                             <div class="course-overview-info-left">
                                                 <div class="course-overview-info-advisor mt-10">
-                                                <span class="gray-color">Advisor : <span class="primary-color"><?php echo isset($_GET['teachername']) ? urldecode($_GET['teachername']) : 'Teacher Name Not Found'; ?></span></span>
-                                                    </div>
+                                                    <span class="gray-color">Advisor : <span class="primary-color"><?php echo isset($_GET['teachername']) ? urldecode($_GET['teachername']) : 'Teacher Name Not Found'; ?></span></span>
+                                                </div>
                                                 <div class="course-overview-student-lecture mt-10">
                                                     <span class="gray-color">Students : <span class="primary-color">15</span></span>
                                                     <span class="student-lecture-number gray-color">Lectures: <span class="primary-color">35</span></span>
@@ -170,217 +226,111 @@
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <p class="course-details-curiculum-para">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system and expoune.</p>
                                         <div class="curiculum-lecture-details">
-                                        <div class="single-curiculum-lecture table-responsive mt-20">
-                                            <h4 class="primary-color font-weight-bold">Lecture Slides</h4>
-                                        </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.1</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 30 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <div class="single-curiculum-lecture table-responsive mt-20">
+                                                <h4 class="primary-color font-weight-bold">Lecture Slides</h4>
                                             </div>
                                             <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="single-curiculum-lecture table-responsive mt-10">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="ti-book"></span>
-                                                                <span class="chapter-name">Lecture 1.2</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-timer "></span>
-                                                                <span class="chapter-name">Time : 20 Minute</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="ti-user"></span>
-                                                                <span class="chapter-name">Seat : 25</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <?php
+                                                $courseName = isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found';
+
+                                                require_once("db.php");
+                                                $sql = "SELECT lecture FROM course_details WHERE coursename = '$courseName'";
+                                                $result = mysqli_query($con, $sql);
+                                                if ($result) {
+                                                    echo '<table class="table">';
+                                                    echo '<tbody>';
+                                                    $lectureNumber = 1;
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        $lectureFilename = $row['lecture'];
+                                                        $lecturePath = '../admin/courses/' . $lectureFilename;
+
+                                                        echo '<tr>';
+                                                        echo '<td>';
+                                                        echo '<span class="ti-book"></span>';
+                                                        echo '<span class="chapter-name">Lecture ' . $lectureNumber . '</span>';
+                                                        echo '<br>';
+                                                        echo '<a href="' . $lecturePath . '" target="_blank">' . $lectureFilename . '</a>';
+                                                        echo '</td>';
+                                                        echo '</tr>';
+
+                                                        $lectureNumber++;
+                                                    }
+                                                    echo '</tbody>';
+                                                    echo '</table>';
+                                                } else {
+                                                    echo "Failed to fetch lecture content: " . mysqli_error($con);
+                                                }
+                                                ?>
                                             </div>
                                             <div class="single-curiculum-lecture table-responsive mt-20">
-                                            <h4 class="primary-color font-weight-bold">Quizzes & Assignments</h4>
-                                        </div>
-                                        <div class="single-curiculum-lecture table-responsive mt-20">
-                                            <h4 class="primary-color font-weight-bold">Learning Resources</h4>
-                                        </div>
+                                                <h4 class="primary-color font-weight-bold">Quizzes & Assignments</h4>
+                                                <?php
+                                                $courseName = isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found';
+                                                $sql = "SELECT quiz FROM quiz_details WHERE coursename = '$courseName'";
+                                                $result = mysqli_query($con, $sql);
+
+                                                if ($result) {
+                                                    echo '<table class="table">';
+                                                    echo '<tbody>';
+                                                    $quizNumber = 1;
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        $quizFilename = $row['quiz'];
+                                                        $quizPath = '../admin/quizzes/' . $quizFilename;
+
+                                                        echo '<tr>';
+                                                        echo '<td>';
+                                                        echo '<span class="ti-book"></span>';
+                                                        echo '<span class="chapter-name">Quiz ' . $quizNumber . '</span>';
+                                                        echo '<br>';
+                                                        echo '<a href="' . $quizPath . '" target="_blank">' . $quizFilename . '</a>';
+                                                        echo '</td>';
+                                                        echo '</tr';
+                                                        $quizNumber++;
+                                                    }
+                                                    echo '</tbody>';
+                                                    echo '</table>';
+                                                } else {
+                                                    echo "Failed to fetch quiz content: " . mysqli_error($con);
+                                                }
+
+                                                $courseName = isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found';
+                                                $sql = "SELECT assignment FROM assignment_details WHERE coursename = '$courseName'";
+                                                $result = mysqli_query($con, $sql);
+
+                                                if ($result) {
+                                                    echo '<table class="table">';
+                                                    echo '<tbody>';
+                                                    $assignmentNumber = 1;
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        $assignmentFilename = $row['assignment'];
+                                                        $assignmentPath = '../admin/assignments/' . $assignmentFilename;
+
+                                                        echo '<tr>';
+                                                        echo '<td>';
+                                                        echo '<span class="ti-book"></span>';
+                                                        echo '<span class="chapter-name">Assignment ' . $assignmentNumber . '</span>';
+                                                        echo '<br>';
+                                                        echo '<a href="' . $assignmentPath . '" target="_blank">' . $assignmentFilename . '</a>';
+                                                        echo '</td>';
+                                                        echo '</tr>';
+
+                                                        $assignmentNumber++;
+                                                    }
+                                                    echo '</tbody>';
+                                                    echo '</table>';
+                                                } else {
+                                                    echo "Failed to fetch assignment content: " . mysqli_error($con);
+                                                }
+
+                                                ?>
+                                                <div class="single-curiculum-lecture table-responsive mt-20">
+                                                    <h4 class="primary-color font-weight-bold">Learning Resources</h4>
+                                                    <a href="https://youtu.be/pTB0EiLXUC8?si=2glFxg1FuOUe4Jf6" target="_blank" style="color: black;" class="mt-2">Learn More About Object Oriented Programming</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                         <div class="course-details-adivisor-info mt-30">
                                             <div class="course-details-adivisor-wrapper">
@@ -391,7 +341,7 @@
                                                     <div class="adivisor-text white-bg">
                                                         <div class="adivisor-text-heading d-flex mb-10">
                                                             <div class="adivisor-text-title">
-                                                            <h4><?php echo isset($_GET['teachername']) ? urldecode($_GET['teachername']) : 'Teacher Name Not Found'; ?></h4>
+                                                                <h4><?php echo isset($_GET['teachername']) ? urldecode($_GET['teachername']) : 'Teacher Name Not Found'; ?></h4>
                                                                 <span>CSE Teacher</span>
                                                             </div>
                                                         </div>
@@ -416,48 +366,80 @@
                                         <div class="course-details-reviews mt-30">
                                             <div class="cours-reviews-list mb-30">
                                                 <div class="course-reviews-info d-flex justify-content-between align-items-center">
-                                                    <div class="reviews-author-info d-flex">
-                                                        <div class="reviews-author-thumb">
-                                                            <img src="img/testimonials/testimonilas_author_thumb1.png" alt="">
-                                                        </div>
-                                                        <div class="reviews-author-title">
-                                                            <h1>Nathaniel Bustos</h1>
-                                                            <span>Manager</span>
-                                                        </div>
+                                                    <div class="reviews-author-info d-flex"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mx-0 mx-sm-auto">
+                                                <div class="card">
+                                                    <div class="card-header" style="background-color:#002147;">
+                                                        <h5 class="card-title text-white mt-2" id="exampleModalLabel">Feedback Form</h5>
                                                     </div>
-                                                    <div class="courses-reviews-author-rating">
-                                                        <ul>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                        </ul>
+                                                    <div class="modal-body">
+                                                        <div class="text-center">
+                                                            <i class=" fa-4x mb-3 text-primary ti-file-alt"></i>
+                                                            <p>
+                                                                <strong>Your opinion matters</strong>
+                                                            </p>
+                                                            <p>
+                                                                Have some ideas how to improve our services?
+                                                                <strong>Give us your feedback.</strong>
+                                                            </p>
+                                                        </div>
+
+                                                        <hr />
+
+                                                        <form class="px-4" role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                                                            <p class="text-center"><strong>Your rating:</strong></p>
+
+                                                            <div class="form-check mb-2">
+                                                                <input type="text" class="form-control" name="userName" id="userName" placeholder="Your Name" required>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio" name="rating" value="Very Good" id="radio3Example1" />
+                                                                <label class="form-check-label" for="radio3Example1">
+                                                                    Very good
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio" name="rating" value="Good" id="radio3Example2" />
+                                                                <label class="form-check-label" for="radio3Example2">
+                                                                    Good
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio" name="rating" value="Medicore" id="radio3Example3" />
+                                                                <label class="form-check-label" for="radio3Example3">
+                                                                    Medicore
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio" name="rating" value="Bad" id="radio3Example4" />
+                                                                <label class="form-check-label" for="radio3Example4">
+                                                                    Bad
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio" name="rating" value="Very Bad" id="radio3Example5" />
+                                                                <label class="form-check-label" for="radio3Example5">
+                                                                    Very bad
+                                                                </label>
+                                                            </div>
+
+                                                            <p class="text-center"><strong>What could we improve?</strong></p>
+
+                                                            <!-- Message input -->
+                                                            <div class="form-outline mb-4">
+                                                                <textarea class="form-control" name="comments" id="form4Example3" rows="4"></textarea>
+                                                                <label class="form-label" for="form4Example3">Your feedback</label>
+                                                            </div>
+                                                            <div class="card-footer faq-form-btn">
+                                                                <button type="submit" class="btn m-auto d-block">Submit</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="cours-reviews-list mb-10">
-                                                <div class="course-reviews-info d-flex justify-content-between align-items-center">
-                                                    <div class="reviews-author-info d-flex">
-                                                        <div class="reviews-author-thumb">
-                                                            <img src="img/testimonials/testimonilas_author_thumb2.png" alt="">
-                                                        </div>
-                                                        <div class="reviews-author-title">
-                                                            <h1>Latanya Kinard</h1>
-                                                            <span>Web Designer</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="courses-reviews-author-rating">
-                                                        <ul>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                            <li><span class="ti-star"></span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -637,53 +619,53 @@
             </div>
             <div class="courses-list">
                 <div class="row">
-                    
-                <div class="col-xl-4 col-lg-4 col-md-6">
-    <?php
-    require_once("db.php"); // Include your database connection code
 
-    $query = "SELECT * FROM course_details";
-    $result = mysqli_query($con, $query);
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <?php
+                        require_once("db.php"); // Include your database connection code
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $courseName = $row['coursename'];
-            $courseDescription = $row['description'];
-            $teachername = $row['teachername'];
-            $degreename = $row['degree'];
-            $coursecode = $row['coursecode'];
+                        $query = "SELECT * FROM course_details";
+                        $result = mysqli_query($con, $query);
 
-            echo '<div class="courses-wrapper courses-wrapper-3 mb-30">';
-            echo '<div class="courses-thumb">';
-            echo '<img src="img/courses/coursesthumb_home3_01.jpg" alt="">';
-            echo '</div>';
-            echo '<div class="courses-content courses-content-3 clearfix">';
-            echo '<div class="courses-heading mt-25 d-flex">';
-            echo '<div class="course-title-3">';
-            echo '<h1><a href="#">' . $courseName . '</a></h1>';
-            echo '</div>';
-            echo '<div class="courses-pricing-3">';
-            echo '<span>$20.50</span>';
-            echo '</div>';
-            echo '</div>';
-            echo '<div class="courses-para mt-15">';
-            echo '<p>' . $courseDescription . '</p>';
-            echo '</div>';
-            echo '<div class="courses-wrapper-bottom clearfix mt-35">';
-            echo '<div class="courses-button">';
-            echo '<a href="course_details.php?coursename=' . urlencode($courseName) . '&description=' . urlencode($courseDescription) . '&degree=' . urlencode($degreename) . '&teachername=' . urlencode($teachername) . '&coursecode=' . urlencode($coursecode) . '">View Details</a>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-        }
-    } else {
-        echo '<p>No courses found.</p>';
-    }
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $courseName = $row['coursename'];
+                                $courseDescription = $row['description'];
+                                $teachername = $row['teachername'];
+                                $degreename = $row['degree'];
+                                $coursecode = $row['coursecode'];
 
-    mysqli_close($con); // Close the database connection
-    ?>
-</div>
+                                echo '<div class="courses-wrapper courses-wrapper-3 mb-30">';
+                                echo '<div class="courses-thumb">';
+                                echo '<img src="img/courses/coursesthumb_home3_01.jpg" alt="">';
+                                echo '</div>';
+                                echo '<div class="courses-content courses-content-3 clearfix">';
+                                echo '<div class="courses-heading mt-25 d-flex">';
+                                echo '<div class="course-title-3">';
+                                echo '<h1><a href="#">' . $courseName . '</a></h1>';
+                                echo '</div>';
+                                echo '<div class="courses-pricing-3">';
+                                echo '<span>$20.50</span>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '<div class="courses-para mt-15">';
+                                echo '<p>' . $courseDescription . '</p>';
+                                echo '</div>';
+                                echo '<div class="courses-wrapper-bottom clearfix mt-35">';
+                                echo '<div class="courses-button">';
+                                echo '<a href="course_details.php?coursename=' . urlencode($courseName) . '&description=' . urlencode($courseDescription) . '&degree=' . urlencode($degreename) . '&teachername=' . urlencode($teachername) . '&coursecode=' . urlencode($coursecode) . '">View Details</a>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p>No courses found.</p>';
+                        }
+
+                        mysqli_close($con); // Close the database connection
+                        ?>
+                    </div>
                 </div>
                 <div class="courses-view-more-area mt-20 mb-30 text-center">
                     <div class="row">
@@ -824,7 +806,7 @@
                                     </div>
                                     <div class="single-footer-contact-info">
                                         <span class="ti-location-pin"></span>
-                                        <span class="footer-contact-list-text">PMAS-Arid Agriculture University Rawalpindi, 
+                                        <span class="footer-contact-list-text">PMAS-Arid Agriculture University Rawalpindi,
                                             Shamsabad, Muree Road Rawalpindi - Pakistan. </span>
                                     </div>
                                 </div>
@@ -840,7 +822,7 @@
                 </div>
                 <div class="footer-bottom pt-25 pb-25">
                     <div class="container">
-                       
+
                     </div>
                 </div>
             </div>

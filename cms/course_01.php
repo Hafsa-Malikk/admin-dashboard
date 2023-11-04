@@ -1,6 +1,5 @@
-<!doctype html>
+<!Doctype html>
 <html class="no-js" lang="zxx">
-
 
 <head>
     <meta charset="utf-8">
@@ -64,7 +63,7 @@
 
                                     </li>
                                     <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
-                                            
+
                                         </a></li>
                                 </ul>
                             </div>
@@ -73,7 +72,6 @@
                                     <ul>
                                         <li><a href="index.php">Home</a></li>
                                         <li><a href="about_us.php">About Us</a></li>
-                                        
                                         <li><a href="course_01.php">Courses</a></li>
                                         <li><a href="resources.php">Resources</a></li>
                                         <li><a href="contact_us.php">Contact</a></li>
@@ -160,7 +158,7 @@
                                 echo '</div>';
                                 echo '<div class="courses-single-icon">';
                                 echo '<span class="ti-user"></span>';
-                                echo '<span class="user-number">'.$teachername.'</span>';
+                                echo '<span class="user-number">' . $teachername . '</span>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '<div class="courses-button f-right">';

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -24,6 +25,8 @@
   <link rel="stylesheet" href="css/default.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -62,9 +65,7 @@
                       </div>
                     </a>
                   </li>
-                  <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
-                                            
-                                        </a></li>
+
                 </ul>
               </div>
               <div class="main-menu f-right">
@@ -72,10 +73,17 @@
                   <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about_us.php">About Us</a></li>
-                    
+
                     <li><a href="course_01.php">Courses</a></li>
                     <li><a href="resources.php">Resources</a></li>
                     <li><a href="contact_us.php">Contact</a></li>
+                    <li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
+                      <ul class="submenu">
+                        <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
+                        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                      </ul>
+
+                    </li>
                   </ul>
                 </nav>
               </div>
@@ -378,122 +386,53 @@
       </div>
       <div class="testimonilas-list">
         <div class="row testimonilas-active">
-          <div class="col-xl-12">
-            <div class="testimonilas-wrapper mb-110">
-              <div class="testimonilas-heading d-flex">
-                <div class="testimonilas-author-thumb">
-                  <img src="img/testimonials/testimonilas_author_thumb1.png" alt="" />
-                </div>
-                <div class="testimonilas-author-title">
-                  <h1>Lisa McClanahan</h1>
-                  <h2>CSE Student</h2>
-                </div>
-              </div>
-              <div class="testimonilas-para">
-                <p>
-                  But also the leap into electronic type reman see essentially
-                  unchanged. It was popul arised thew with the release of
-                  letraset sheets.
-                </p>
-              </div>
-              <div class="testimonilas-rating">
-                <ul>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-12">
-            <div class="testimonilas-wrapper">
-              <div class="testimonilas-heading d-flex">
-                <div class="testimonilas-author-thumb">
-                  <img src="img/testimonials/testimonilas_author_thumb1.png" alt="" />
-                </div>
-                <div class="testimonilas-author-title">
-                  <h1>Lisa McClanahan</h1>
-                  <h2>CSE Student</h2>
-                </div>
-              </div>
-              <div class="testimonilas-para">
-                <p>
-                  But also the leap into electronic type reman see essentially
-                  unchanged. It was popul arised thew with the release of
-                  letraset sheets.
-                </p>
-              </div>
-              <div class="testimonilas-rating">
-                <ul>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-12">
-            <div class="testimonilas-wrapper">
-              <div class="testimonilas-heading d-flex">
-                <div class="testimonilas-author-thumb">
-                  <img src="img/testimonials/testimonilas_author_thumb2.png" alt="" />
-                </div>
-                <div class="testimonilas-author-title">
-                  <h1>Trevor J. Angelo</h1>
-                  <h2>Englisg Student</h2>
-                </div>
-              </div>
-              <div class="testimonilas-para">
-                <p>
-                  But also the leap into electronic type reman see essentially
-                  unchanged. It was popul arised thew with the release of
-                  letraset sheets.
-                </p>
-              </div>
-              <div class="testimonilas-rating">
-                <ul>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-12">
-            <div class="testimonilas-wrapper">
-              <div class="testimonilas-heading d-flex">
-                <div class="testimonilas-author-thumb">
-                  <img src="img/testimonials/testimonilas_author_thumb1.png" alt="" />
-                </div>
-                <div class="testimonilas-author-title">
-                  <h1>Marquita Brown</h1>
-                  <h2>CSE Student</h2>
-                </div>
-              </div>
-              <div class="testimonilas-para">
-                <p>
-                  But also the leap into electronic type reman see essentially
-                  unchanged. It was popul arised thew with the release of
-                  letraset sheets.
-                </p>
-              </div>
-              <div class="testimonilas-rating">
-                <ul>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                  <li><span class="ti-star"></span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <?php
+          require_once("db.php");
+
+          $sql = "SELECT name, rating, comments FROM feedback";
+          $result = mysqli_query($con, $sql);
+
+          if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+              $userName = $row['name'];
+              $rating = $row['rating'];
+              $comments = $row['comments'];
+
+              // Print the feedback details inside your HTML structure
+              echo '<div class="col-xl-12">';
+              echo '<div class="testimonilas-wrapper mb-110">';
+              echo '<div class="testimonilas-heading d-flex">';
+              echo '<div class="testimonilas-author-thumb">';
+              echo '<img src="img/testimonials/testimonilas_author_thumb1.png" alt="" />';
+              echo '</div>';
+              echo '<div class="testimonilas-author-title">';
+              echo "<h1>$userName</h1>";
+              echo "<h2>CSE Student</h2>"; // You can customize the role
+              echo '</div>';
+              echo '</div>';
+              echo '<div class="testimonilas-para">';
+              echo "<p>$comments</p>";
+              echo '</div>';
+              echo '<div class="testimonilas-rating">';
+              echo '<ul>';
+
+              // Display star ratings based on the rating value
+              for ($i = 1; $i <= 5; $i++) {
+                $starClass = ($i <= $rating) ? 'ti-star' : 'ti-star-o';
+                echo "<li><span class='$starClass'></span></li>";
+              }
+
+              echo '</ul>';
+              echo '</div>';
+              echo '</div>';
+              echo '</div>';
+            }
+          } else {
+            echo "Failed to fetch feedback details: " . mysqli_error($con);
+          }
+
+          mysqli_close($con);
+          ?>
         </div>
       </div>
     </div>
