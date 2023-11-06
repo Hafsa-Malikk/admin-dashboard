@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -73,14 +72,13 @@
                   <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about_us.php">About Us</a></li>
-
                     <li><a href="course_01.php">Courses</a></li>
                     <li><a href="resources.php">Resources</a></li>
                     <li><a href="contact_us.php">Contact</a></li>
-                    <li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
+                    <li class="shopping-cart"><a href="#"><span class="ti-user" type="hidden"></span></a>
                       <ul class="submenu">
                         <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
-                        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                        <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
                       </ul>
 
                     </li>
@@ -407,22 +405,14 @@
               echo '</div>';
               echo '<div class="testimonilas-author-title">';
               echo "<h1>$userName</h1>";
-              echo "<h2>CSE Student</h2>"; // You can customize the role
               echo '</div>';
-              echo '</div>';
-              echo '<div class="testimonilas-para">';
-              echo "<p>$comments</p>";
               echo '</div>';
               echo '<div class="testimonilas-rating">';
-              echo '<ul>';
-
-              // Display star ratings based on the rating value
-              for ($i = 1; $i <= 5; $i++) {
-                $starClass = ($i <= $rating) ? 'ti-star' : 'ti-star-o';
-                echo "<li><span class='$starClass'></span></li>";
-              }
-
-              echo '</ul>';
+              echo "<p><strong>Rating : </strong>$rating</p>";
+              echo "</div>";
+              echo '<div class="testimonilas-para">';
+              echo "<p><strong>Comments : </strong>$comments</p>";
+              echo '</div>';
               echo '</div>';
               echo '</div>';
               echo '</div>';

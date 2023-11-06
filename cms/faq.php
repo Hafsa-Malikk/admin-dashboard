@@ -63,7 +63,7 @@
 
                                     </li>
                                     <li class="shopping-cart"><a href="#"><span class="ti-user"></span>
-                                            
+
                                         </a></li>
                                 </ul>
                             </div>
@@ -72,10 +72,16 @@
                                     <ul>
                                         <li><a href="index.php">Home</a></li>
                                         <li><a href="about_us.php">About Us</a></li>
-                                        
                                         <li><a href="course_01.php">Courses</a></li>
                                         <li><a href="resources.php">Resources</a></li>
                                         <li><a href="contact_us.php">Contact</a></li>
+                                        <li class="shopping-cart"><a href="#"><span class="ti-user" type="hidden"></span></a>
+                                            <ul class="submenu">
+                                                <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
+                                                <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                                            </ul>
+
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
