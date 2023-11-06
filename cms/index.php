@@ -78,9 +78,8 @@
                     <li class="shopping-cart"><a href="#"><span class="ti-user" type="hidden"></span></a>
                       <ul class="submenu">
                         <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
-                        <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                        <li><a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
                       </ul>
-
                     </li>
                   </ul>
                 </nav>
@@ -264,7 +263,7 @@
                   </div>
                 </div>
                 <div class="courses-button f-right">
-                  <a href="course_01.php">View Details</a>
+                  <a href="course_01.php">View Courses</a>
                 </div>
               </div>
             </div>
@@ -306,7 +305,7 @@
                   </div>
                 </div>
                 <div class="courses-button f-right">
-                  <a href="course_01.php">View Details</a>
+                  <a href="course_01.php">View Courses</a>
                 </div>
               </div>
             </div>
@@ -348,7 +347,7 @@
                   </div>
                 </div>
                 <div class="courses-button f-right">
-                  <a href="course_01.php">View Details</a>
+                  <a href="course_01.php">View Courses</a>
                 </div>
               </div>
             </div>
@@ -964,6 +963,31 @@
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
   <script src="js/search.js"></script>
+
+  <script src="../admin/alert.js"></script>
+
+
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function(event) {
+      event.preventDefault(); 
+
+      fetch('logout.php', {
+          method: 'POST', 
+        })
+        .then(response => response.json())
+        .then(data => {
+          
+        })
+        .catch(error => {
+          console.error('An error occurred:', error);
+        });
+        alert("You have been logged out.")
+    })
+    ;
+  </script>
+
+
+
 
 </body>
 

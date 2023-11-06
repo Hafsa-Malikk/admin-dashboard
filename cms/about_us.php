@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="css/default.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -55,11 +57,6 @@
                       </div>
                     </a>
                   </li>
-                  <li class="shopping-cart">
-                    <a href="#"><span class="ti-user"></span>
-
-                    </a>
-                  </li>
                 </ul>
               </div>
               <div class="main-menu f-right">
@@ -75,7 +72,6 @@
                         <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
                         <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
                       </ul>
-
                     </li>
                   </ul>
                 </nav>
