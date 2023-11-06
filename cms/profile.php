@@ -1,3 +1,39 @@
+<?php
+session_start(); // Start the session
+
+if (!isset($_SESSION['email'])) {
+  header('Location: login.php');
+  exit();
+}
+
+// Include your database connection
+require_once('db.php');
+
+// Fetch user details from the database
+$email = $_SESSION['email'];
+$sql = "SELECT name, email,phone,address FROM users WHERE email = ?";
+$stmt = mysqli_prepare($con, $sql);
+
+if ($stmt) {
+  mysqli_stmt_bind_param($stmt, "s", $email);
+  if (mysqli_stmt_execute($stmt)) {
+    mysqli_stmt_bind_result($stmt, $name, $email,$phone,$address);
+    mysqli_stmt_fetch($stmt);
+  } else {
+    // Handle the error
+    echo "Failed to execute the query: " . mysqli_error($con);
+  }
+
+  mysqli_stmt_close($stmt);
+} else {
+  // Handle the error
+  echo "Preparation of the statement failed: " . mysqli_error($con);
+}
+
+mysqli_close($con);
+?>
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -97,92 +133,82 @@
   <!-- header-end -->
   <div class="container">
     <div class="main-body">
-    
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
-    
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <button class="btn btn-outline-primary">Message</button>
-                    </div>
-                  </div>
+
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+          <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+        </ol>
+      </nav>
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                <div class="mt-3">
+                  <h4><?php echo $name; ?></h4>
+                  <button class="btn btn-outline-primary">Message</button>
                 </div>
               </div>
-             
-            </div>
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn btn-outline-primary" target="__blank" href="edit_profile.php">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br>
             </div>
           </div>
         </div>
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                <?php echo $name; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                <?php echo $email; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                <?php echo $phone; ?>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                <?php echo $address; ?>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-12">
+                  <a class="btn btn-outline-primary" target="__blank" href="edit_profile.php">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
+  </div>
   <!-- footer start -->
   <footer id="Contact">
     <div class="footer-area primary-bg pt-100">
@@ -342,21 +368,20 @@
 
   <script>
     document.getElementById('logout-link').addEventListener('click', function(event) {
-      event.preventDefault(); 
+      event.preventDefault();
 
       fetch('logout.php', {
-          method: 'POST', 
+          method: 'POST',
         })
         .then(response => response.json())
         .then(data => {
-          
+
         })
         .catch(error => {
           console.error('An error occurred:', error);
         });
-        alert("You have been logged out.")
-    })
-    ;
+      alert("You have been logged out.")
+    });
   </script>
 
 

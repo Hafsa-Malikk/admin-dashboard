@@ -77,7 +77,7 @@
                     <li><a href="contact_us.php">Contact</a></li>
                     <li class="shopping-cart"><a href="#"><span class="ti-user" type="hidden"></span></a>
                       <ul class="submenu">
-                        <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
+                        <li><a href="profile.php"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
                         <li><a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
                       </ul>
                     </li>
