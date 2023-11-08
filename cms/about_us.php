@@ -398,7 +398,7 @@
       <div class="testimonilas-list">
         <div class="row testimonilas-active">
           <div class="col-xl-12">
-            <div class="testimonilas-wrapper mb-110">
+            <div class="testimonilas-wrapper">
               <div class="testimonilas-heading d-flex">
                 <div class="testimonilas-author-thumb">
                   <img src="img/testimonials/testimonilas_author_thumb1.png" alt="" />
