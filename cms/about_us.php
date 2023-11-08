@@ -67,12 +67,17 @@
                     <li><a href="course_01.php">Courses</a></li>
                     <li><a href="resources.php">Resources</a></li>
                     <li><a href="contact_us.php">Contact</a></li>
-                    <li class="shopping-cart"><a href="#"><span class="ti-user" type="hidden"></span></a>
-                      <ul class="submenu">
-                        <li><a href="#"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
-                        <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
-                      </ul>
-                    </li>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['email'])) {
+                      echo '<li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
+                          <ul class="submenu">
+                              <li><a href="profile.php"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
+                              <li><a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                          </ul>
+                      </li>';
+                    }
+                    ?>
                   </ul>
                 </nav>
               </div>
@@ -705,6 +710,28 @@
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
   <script src="js/search.js"></script>
+
+  
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      fetch('logout.php', {
+          method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+
+        })
+        .catch(error => {
+          console.error('An error occurred:', error);
+        });
+      alert("You have been logged out.")
+      location.reload();
+
+    });
+  </script>
+
 
 </body>
 
