@@ -35,7 +35,74 @@
         <![endif]-->
 
     <!-- Add your site or application content here -->
+<<<<<<< HEAD
     <?php include('nav.php'); ?>
+=======
+    <!-- header-start -->
+    <header id="home">
+        <div class="header-area">
+            <!-- header-top -->
+
+            <!-- /end header-top -->
+            <!-- header-bottom -->
+            <div class="header-bottom-area header-sticky" style="transition: .6s;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-6 col-6">
+                            <div class="logo">
+                                <a href="index.php">
+                                    <img src="img/logo/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-6 col-6">
+                            <div class="header-bottom-icon f-right">
+                                <ul>
+                                    <li class="toggle-search-icon"><a href="#"><span class="ti-search"></span>
+                                            <div class="toggle-search-box">
+                                                <form action="#" id="searchbox">
+                                                    <input placeholder="Search" type="text" id="search-input">
+                                                    <button class="button-search"><span class="ti-search"></span></button>
+                                                </form>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="main-menu f-right">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        <li><a href="index.php">Home</a></li>
+                                        <li><a href="about_us.php">About Us</a></li>
+                                        <li><a href="course_01.php">Courses</a></li>
+                                        <li><a href="resources.php">Resources</a></li>
+                                        <li><a href="contact_us.php">Contact</a></li>
+                                        <?php
+                    session_start();
+                    if (isset($_SESSION['email'])) {
+                      echo '<li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
+                          <ul class="submenu">
+                              <li><a href="profile.php"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
+                              <li><a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
+                          </ul>
+                      </li>';
+                    }
+                    ?>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /end header-bottom -->
+        </div>
+    </header>
+    <!-- header-end -->
+>>>>>>> 28d5204df3045b66104478516f6909be5db54ef2
     <!-- slider-start -->
     <div class="slider-area">
         <div class="pages-title">
@@ -355,6 +422,29 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="js/search.js"></script>
+
+
+    
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      fetch('logout.php', {
+          method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+
+        })
+        .catch(error => {
+          console.error('An error occurred:', error);
+        });
+      alert("You have been logged out.")
+      location.reload();
+
+    });
+  </script>
+
 
 </body>
 
