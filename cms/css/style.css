@@ -224,7 +224,7 @@ label {
 
 /* button style */
 .btn {
-    -moz-user-select: none;
+    /* -moz-user-select: none; */
     background: #fdc800;
     border: medium none;
     border-radius: 0;
@@ -581,7 +581,7 @@ li.shopping-cart a {
     color: #ddd;
 }
 
-.toggle-search-box {}
+/* .toggle-search-box {} */
 
 .toggle-search-icon a:hover .toggle-search-box form {
     opacity: 1;
@@ -3368,4 +3368,29 @@ span.opening-date {
 .footer-copyright span {
     font-size: 15px;
     color: #949494;
+}
+
+@media (max-width: 768px) {
+    .hide-logo {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+.main-menu{
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+height: 100px;
+z-index: 1;
+transition: left 0.4s;
+}
+.main-menu ul {
+display: flex;
+flex-direction: row;
+}
+.main-menu ul li {
+gap: 20px; /* Add spacing between menu items */
+}
 }

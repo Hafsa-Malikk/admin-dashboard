@@ -74,6 +74,9 @@ mysqli_close($con);
     <![endif]-->
 
   <!-- Add your site or application content here -->
+<<<<<<< HEAD
+  <?php include('nav.php'); ?>
+=======
   <!-- header-start -->
   <header id="home">
     <div class="header-area">
@@ -135,6 +138,7 @@ mysqli_close($con);
     </div>
   </header>
   <!-- header-end -->
+>>>>>>> 28d5204df3045b66104478516f6909be5db54ef2
   <div class="container">
     <div class="main-body">
 
@@ -212,6 +216,9 @@ mysqli_close($con);
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+    <?php include('footer.php'); ?>
+=======
   </div>
   <!-- footer start -->
   <footer id="Contact">
@@ -344,6 +351,7 @@ mysqli_close($con);
     </div>
   </footer>
   <!-- footer end -->
+>>>>>>> 28d5204df3045b66104478516f6909be5db54ef2
 
   <!-- JS here -->
   <script src="js/vendor/modernizr-3.5.0.min.js"></script>

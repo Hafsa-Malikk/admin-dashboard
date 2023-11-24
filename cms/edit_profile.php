@@ -97,6 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+<<<<<<< HEAD
+<?php include('nav.php'); ?>
+=======
   <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -167,6 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </header>
   <!-- header-end -->
+>>>>>>> 28d5204df3045b66104478516f6909be5db54ef2
   <!-- Main-start -->
   <div class="container">
     <div class="main-body">
@@ -226,6 +230,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
                   </div>
 
+<<<<<<< HEAD
+			</div>
+		</div>
+	</div>
+
+  <!-- Main-end -->
+
+  <?php include('footer.php'); ?>
+=======
                 </div>
                 <div class="row">
                   <div class="col-sm-3"></div>
@@ -241,6 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
     </div>
+>>>>>>> 28d5204df3045b66104478516f6909be5db54ef2
 
     <!-- Main-end -->
 
