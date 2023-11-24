@@ -257,12 +257,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
-  </div>
-  <!-- courses end -->
-  <!-- map start -->
-  <!-- map end -->
-  <!-- brand start -->
-  <!-- brand end -->
   <!-- subscribe start -->
   <div class="subscribe-area">
     <div class="container">

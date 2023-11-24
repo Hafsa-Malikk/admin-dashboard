@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -128,15 +128,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <li><a href="resources.php">Resources</a></li>
                                 <li><a href="contact_us.php">Contact</a></li>
                                 <?php
-                    if (isset($_SESSION['email'])) {
-                      echo '<li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
+                                if (isset($_SESSION['email'])) {
+                                    echo '<li class="shopping-cart"><a href="#"><span class="ti-user"></span></a>
                 <ul class="submenu">
                     <li><a href="profile.php"><i class="fa fa-user mr-2" aria-hidden="true"></i>Profile</a></li>
                     <li><a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket mr-2" aria-hidden="true"></i>Log Out</a></li>
                 </ul>
             </li>';
-                    }
-                    ?>
+                                }
+                                ?>
                             </ul>
                         </nav>
                     </div>
@@ -331,8 +331,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                                 ?>
                                                 <div class="single-curiculum-lecture table-responsive mt-20">
-                                                    <h4 class="primary-color font-weight-bold">Learning Resources</h4>
-                                                    <a href="https://youtu.be/pTB0EiLXUC8?si=2glFxg1FuOUe4Jf6" target="_blank" style="color: black;" class="mt-2">Learn More About Object Oriented Programming</a>
+                                                    <h4 class="primary-color font-weight-bold text-center mt-3">Learning Resources</h4>
+                                                    <?php
+                                                    $courseName = isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found';
+                                                    echo '<h4>Learn More About the ' . $courseName . '</h4>';
+                                                    $subject = isset($_GET['coursename']) ? urlencode($_GET['coursename']) : 'Course Name Not Found';
+                                                    $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q={$subject}&type=video&key={$apiKey}";
+                                                    $response = json_decode(file_get_contents($url), true);
+                                                    $videos = $response['items'] ?? [];
+                                                    foreach ($videos as $video) {
+                                                        echo '<iframe class="mt-5" width="560" height="315" src="https://www.youtube.com/embed/' . $video['id']['videoId'] . '" frameborder="0" allowfullscreen></iframe>';
+                                                        echo '<b>Title :' . $video['snippet']['title'] . '</b>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="single-curiculum-lecture table-responsive mt-20">
+                                                    <h4 class="primary-color font-weight-bold text-center">Google Articles And Websites</h4>
+                                                    <?php
+                                                    $courseName = isset($_GET['coursename']) ? urldecode($_GET['coursename']) : 'Course Name Not Found';
+                                                    $searchQuery = $courseName;
+                                                    $searchQueryEncoded = urlencode($searchQuery);
+                                                    $searchUrl = "https://www.googleapis.com/customsearch/v1?q={$searchQueryEncoded}&key={$apiKey}&cx={$cx}";
+                                                    $response = json_decode(file_get_contents($searchUrl), true);
+                                                    if (isset($response['items']) && !empty($response['items'])) {
+                                                        echo "Websites found for " . $courseName . " tutorials:<br>";
+                                                        $counter = 1;
+                                                        foreach ($response['items'] as $item) {
+                                                            echo "{$counter}. <a href=\"{$item['link']}\" target=\"_blank\">{$item['link']}</a><br>";
+                                                            $counter++;
+                                                        }
+                                                    } else {
+                                                        echo "No websites found for." . $courseName . "Tutorials";
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,7 +384,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                             </div>
                                                         </div>
                                                         <div class="adivisor-para">
-                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa dolore mque laudantium totam rem aperiam eaqipsa quae ab illo inventore veritatvolup tatem quia voluptas sit aspernatur aut odit aut fugit sed quia conseque.</p>
+                                                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born, and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
                                                         </div>
                                                         <div class="advisors-social-icon-list">
                                                             <ul>
@@ -627,7 +658,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="courses-list">
                 <div class="row">
 
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-4 col-lg-4 col-md-4">
                         <?php
                         require_once("db.php"); // Include your database connection code
 
@@ -861,26 +892,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="js/search.js"></script>
 
 
-    
-  <script>
-    document.getElementById('logout-link').addEventListener('click', function(event) {
-      event.preventDefault();
 
-      fetch('logout.php', {
-          method: 'POST',
-        })
-        .then(response => response.json())
-        .then(data => {
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            event.preventDefault();
 
-        })
-        .catch(error => {
-          console.error('An error occurred:', error);
+            fetch('logout.php', {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
+            alert("You have been logged out.")
+            location.reload();
+
         });
-      alert("You have been logged out.")
-      location.reload();
-
-    });
-  </script>
+    </script>
 
 
 </body>
